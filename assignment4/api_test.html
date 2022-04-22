@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <h id="data">Data</h>
+    <br />
+    <button onClick="showUsers()">Show data</button>
+    <button onClick="saveUsers()">Save data</button>
+    <script>
+      async function showUsers() {
+        await fetch("https://gorest.co.in/public/v2/users")
+          .then((res) => res.json())
+          .then((data) => console.log((usersData = data)))
+          .catch((error) => console.log("Error"));
+
+        document.getElementById("data").innerHTML = JSON.stringify(usersData);
+      }
+
+      async function saveUsers() {
+        await fetch("https://gorest.co.in/public/v2/users")
+          .then((res) => res.json())
+          .then((data) => (jsonData = JSON.stringify(data)))
+          .catch((error) => console.log("Error"));
+        var element = document.createElement("a");
+        element.setAttribute(
+          "href",
+          "data:text/plain;charset=utf-8," + encodeURIComponent(jsonData)
+        );
+        element.setAttribute("download", "savedUsers.json");
+        element.style.display = "none";
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+        console.log("Saved");
+      }
+    </script>
+  </body>
+</html>
