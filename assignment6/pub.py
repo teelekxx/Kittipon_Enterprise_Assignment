@@ -19,5 +19,5 @@ def publish(name, priority):
     )
     print("publish!")
 
-publish("test", 2)
+publish("testtee", 2)
     
